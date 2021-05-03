@@ -1,0 +1,11 @@
+programa{
+	int impuesto
+	int subtotal
+	int total
+
+	subtotal = 20 * (10/4) + 100
+	impuesto = (subtotal * impuesto/10)
+	total = subtotal + impuesto
+	imprimir(total)
+
+}

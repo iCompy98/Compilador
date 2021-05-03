@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="container" maxHeight="598.0" maxWidth="840.0" prefHeight="598.0" prefWidth="840.0" styleClass="background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="valen.sample.Controller">
+    <children>
+        <TextArea fx:id="txt_Test" layoutX="27.0" layoutY="114.0" prefHeight="225.0" prefWidth="281.0" wrapText="true" />
+        <Button layoutX="129.0" layoutY="353.0" mnemonicParsing="false" onAction="#accion" stylesheets="@css/style.css" text="Compilar" />
+        <MenuBar styleClass="menu" stylesheets="@css/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu id="hola" mnemonicParsing="false" text="Archivo">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openFile" styleClass="menuItem" text="Abrir">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/document.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#saveFile" styleClass="menuItem" text="Guardar">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TextArea fx:id="txt_resultados" editable="false" layoutX="335.0" layoutY="114.0" prefHeight="225.0" prefWidth="208.0" wrapText="true" />
+        <Label id="fancytext" layoutX="357.0" layoutY="53.0" stylesheets="@css/style.css" text="Resultados">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/mission.png" />
+               </image>
+            </ImageView>
+         </graphic></Label>
+      <Label id="fancytext" layoutX="85.0" layoutY="53.0" stylesheets="@css/style.css" text="Entrada">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/test.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+        
+    </children>
+</AnchorPane>

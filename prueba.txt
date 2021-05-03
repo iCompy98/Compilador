@@ -1,0 +1,9 @@
+programa{
+	si(1==(2-1)){
+		si(0){
+			imprimir(9)
+		}no{
+			imprimir("Hola!")
+		}
+	}
+}

@@ -1,0 +1,8 @@
+programa{
+    50 * 2
+    dulce = 10
+    dulce * 2
+    soda = 15
+    (soda * 5 ) + dulce * 3
+    int x
+}
