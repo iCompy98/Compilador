@@ -97,7 +97,7 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     @Override public Integer visitImpresionExpresion(lenguajesParser.ImpresionExpresionContext ctx) {
         if(ctx.expr() == null ){
             //System.out.println(ctx.expr());
-            cadena += ctx.STRING().getText().substring(1,ctx.STRING().getText().length()-1);
+            cadena += ctx.STRING().getText().substring(1,ctx.STRING().getText().length()-1)+"\n";
         }else{
             String x= String.valueOf(visit(ctx.expr()));
             if(x.equals("null")){
@@ -215,7 +215,22 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
                 resul= 0;
             }
         }
+        if (ctx.SIGNO().getText().equals(">")){
+            if(izq > der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if (ctx.SIGNO().getText().equals("<")){
+            if(izq < der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
         return resul;
+
     }
 
 }

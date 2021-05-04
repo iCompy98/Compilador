@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -31,14 +32,16 @@ public class Controller /*implements Initializable*/ {
         private AnchorPane container;
         @FXML
         private Label lbl_Test;
+        @FXML
+        private TextArea vBox;
         private JFileChooser fc = new JFileChooser();
         private String aux_lector;
         private boolean saveFlag=true;
 
-        public Controller(){
-//            System.out.println(lbl_Test.getText());
-
-        }
+        /*@Override
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+                vBox.textProperty().addListener();
+        }*/
 
         public void accion(ActionEvent e) throws Exception {
         //System.out.println("Holaaaa");
@@ -142,11 +145,33 @@ public class Controller /*implements Initializable*/ {
         }
     }
 
-        /*@Override
-        public void initialize(URL url, ResourceBundle resourceBundle) {
-            int x=1;
-            txt_Test.textProperty().addListener((Observable, oldValue, newValue) -> {
-                txt_Test.appendText(x+"\t");
-        });
-        }*/
+        public void saveAsFile(ActionEvent e) throws Exception{
+            BufferedWriter escribir_archivo = null;
+            try {
+                String texto = txt_Test.getText();
+
+                fc.setApproveButtonText("Guardar");
+                fc.showSaveDialog(null);
+
+                File archivo = fc.getSelectedFile();
+                FileWriter fw = new FileWriter(archivo);
+                escribir_archivo = new BufferedWriter(fw);
+                escribir_archivo.write(texto);
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (escribir_archivo != null)
+                        escribir_archivo.close();
+                } catch (IOException exception) {
+                    System.out.println("Error al  cerrar el BufferWriter");
+                }
+            }
+        }
+
+        public void exit(ActionEvent e) throws Exception{
+            System.exit(0);
+        }
 }

@@ -41,7 +41,7 @@ INTEGER: 'int';
 IMPRIME: 'imprimir';
 CONDICION: 'si';
 ONO: 'no';
-SIGNO: '==' | '!='| '<='| '>=';
+SIGNO: '==' | '!='| '<='| '>='|'>'|'<';
 A_LL: '{';
 C_LL: '}';
 IGUAL : '=';
