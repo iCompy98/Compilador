@@ -1,12 +1,7 @@
 programa{
-    int edad
-    
-    si ( edad > 20){
-        imprimir("Eres una persona mayor de edad")
-    } no {
-        imprimir("Te falta edad")
-    }
-    imprimir("fin")
-    imprimir(2021)
-
+	si(0){
+		imprimir("Hola")
+	}no si(1==1){
+		imprimir("Salu2")
+	}
 }

@@ -66,28 +66,21 @@ public class lenguajesBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondicion_if(lenguajesParser.Condicion_ifContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCondiciones(lenguajesParser.CondicionesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondicion_ifelse(lenguajesParser.Condicion_ifelseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitModel_cond(lenguajesParser.Model_condContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTest(lenguajesParser.TestContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitCuerpo_condicion(lenguajesParser.Cuerpo_condicionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitModel_ono(lenguajesParser.Model_onoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

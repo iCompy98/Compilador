@@ -58,31 +58,24 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaracionMultiple(lenguajesParser.DeclaracionMultipleContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code condicion_if}
+	 * Visit a parse tree produced by the {@code condiciones}
 	 * labeled alternative in {@link lenguajesParser#inicio}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondicion_if(lenguajesParser.Condicion_ifContext ctx);
+	T visitCondiciones(lenguajesParser.CondicionesContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code condicion_ifelse}
-	 * labeled alternative in {@link lenguajesParser#inicio}.
+	 * Visit a parse tree produced by {@link lenguajesParser#model_cond}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondicion_ifelse(lenguajesParser.Condicion_ifelseContext ctx);
+	T visitModel_cond(lenguajesParser.Model_condContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#test}.
+	 * Visit a parse tree produced by {@link lenguajesParser#model_ono}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTest(lenguajesParser.TestContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#cuerpo_condicion}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCuerpo_condicion(lenguajesParser.Cuerpo_condicionContext ctx);
+	T visitModel_ono(lenguajesParser.Model_onoContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link lenguajesParser#comparacion}.
 	 * @param ctx the parse tree

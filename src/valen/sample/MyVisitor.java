@@ -149,36 +149,6 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         return null;
     }
 
-    @Override public Integer visitCondicion_if(lenguajesParser.Condicion_ifContext ctx) {
-
-        //cadena += ""+visit(ctx.cond());
-        if(visit(ctx.cond()) == 1){
-            //cadena +="Visitar el interior\n";
-            return visitChildren(ctx);
-        }else {
-            if (visit(ctx.cond()) == 0) {
-                //cadena +="No visitar el interior\n";
-                return null;
-            } else {
-                throw new CondicionInaceptable(ctx.CONDICION().getSymbol());
-            }
-        }
-    }
-
-    @Override public Integer visitCondicion_ifelse(lenguajesParser.Condicion_ifelseContext ctx) {
-        if(visit(ctx.cond()) == 1){
-            //cadena +="Visitar el interior\n";
-            return visitChildren(ctx.test().cuerpo_condicion(0));
-        }else {
-            if (visit(ctx.cond()) == 0) {
-                //cadena +="No visitar el interior\n";
-                return visitChildren(ctx.test().cuerpo_condicion(1));
-            } else {
-                throw new CondicionInaceptable(ctx.CONDICION().getSymbol());
-            }
-        }
-    }
-
     @Override public Integer visitComparacion(lenguajesParser.ComparacionContext ctx) {
         int izq = visit(ctx.expr(0));
         int der = visit(ctx.expr(1));
@@ -231,6 +201,42 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         }
         return resul;
 
+    }
+
+    @Override public Integer visitModel_cond(lenguajesParser.Model_condContext ctx) {
+        //cadena += "Miren, estoy en la condicion\n";
+        //System.out.println(ctx.model_ono());
+        if(ctx.model_ono() == null){
+            //cadena += "If normal\n";
+            //cadena += visit(ctx.cond())+ "\n";
+            if(visit(ctx.cond()) == 1){
+                return visitChildren(ctx);
+            }else{
+                return null;
+            }
+        }else{
+            //cadena += "If-else\n";
+            //System.out.println(ctx.model_ono().model_cond());
+            if(ctx.model_ono().model_cond() == null){
+                //cadena += "If else\n";
+                if(visit(ctx.cond()) == 1){
+                    return visitChildren(ctx.plural());
+                }else{
+                    return visitChildren(ctx.model_ono());
+                }
+            }else{
+                //cadena += "If else if\n";
+
+                return visitChildren(ctx.model_ono());
+            }
+
+        }
+
+    }
+
+    @Override public Integer visitModel_ono(lenguajesParser.Model_onoContext ctx) {
+        System.out.println("JJeeeeeloooouuuu");
+        return visitChildren(ctx);
     }
 
 }

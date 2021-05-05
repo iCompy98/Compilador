@@ -15,13 +15,11 @@ inicio:
     |
     INTEGER (ID COMA)* ID NUEVALINEA            #declaracionMultiple
     |
-    CONDICION PAR_A cond PAR_C cuerpo_condicion        #condicion_if
-    |
-    CONDICION PAR_A cond PAR_C test     #condicion_ifelse
+    model_cond NUEVALINEA                       #condiciones
     ;
 
-test: cuerpo_condicion ONO cuerpo_condicion;
-cuerpo_condicion: A_LL plural C_LL;
+model_cond:CONDICION PAR_A cond PAR_C A_LL plural C_LL model_ono?;
+model_ono:ONO (A_LL plural C_LL| model_cond);
 comparacion: expr SIGNO expr;
 cond:  comparacion | expr;
 
