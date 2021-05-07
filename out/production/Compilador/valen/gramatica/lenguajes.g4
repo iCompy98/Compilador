@@ -20,8 +20,9 @@ inicio:
 
 model_cond:CONDICION PAR_A cond PAR_C A_LL plural C_LL model_ono?;
 model_ono:ONO (A_LL plural C_LL| model_cond);
-comparacion: expr SIGNO expr;
-cond:  comparacion | expr;
+comparacion: PAR_A? expr SIGNO expr PAR_C?;
+cond_logic:  comparacion O_LOG comparacion ;
+cond: NEG? (comparacion | expr | cond_logic) ;
 
 
 expr: expr prod_muldiv expr          #MulDiv
@@ -40,6 +41,8 @@ IMPRIME: 'imprimir';
 CONDICION: 'si';
 ONO: 'no';
 SIGNO: '==' | '!='| '<='| '>='|'>'|'<';
+O_LOG:  '&&' | '||';
+NEG : '!';
 A_LL: '{';
 C_LL: '}';
 IGUAL : '=';
@@ -49,7 +52,7 @@ SUMA: '+';
 RESTA: '-';
 COMA: ',';
 INT: [0-9]+;
-ID: [a-z][a-zA-Z0-9]+;
+ID: [a-z][a-zA-Z0-9]+ | [a-z];
 STRING: '"' (ESC | .)*? '"';
 fragment ESC: '\\' [btnr"\\];
 PAR_A: '(';

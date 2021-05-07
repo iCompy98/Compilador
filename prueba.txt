@@ -1,7 +1,16 @@
 programa{
-	si(0){
-		imprimir("Hola")
-	}no si(1==1){
-		imprimir("Salu2")
-	}
+    int edad
+    
+    edad = 20
+    si ( edad >= 21){
+        imprimir("Eres una persona mayor de edad")
+    } no si ( edad > 15 && edad < 21 ){
+	 
+        imprimir("Estás empezando a vivir y todavía no puedes votar")
+    }no{
+        imprimir("Eres infante")
+    }
+    imprimir("fin")
+    imprimir(2021)
+
 }

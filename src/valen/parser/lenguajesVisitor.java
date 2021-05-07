@@ -83,6 +83,12 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparacion(lenguajesParser.ComparacionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link lenguajesParser#cond_logic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCond_logic(lenguajesParser.Cond_logicContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link lenguajesParser#cond}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
