@@ -204,34 +204,23 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     }
 
     @Override public Integer visitModel_cond(lenguajesParser.Model_condContext ctx) {
-        //cadena += "Miren, estoy en la condicion\n";
-        //System.out.println(ctx.model_ono());
         if(ctx.model_ono() == null){
-            //cadena += "If normal\n";
-            //cadena += visit(ctx.cond())+ "\n";
             if(visit(ctx.cond()) == 1){
                 return visitChildren(ctx);
             }else{
                 return null;
             }
         }else{
-            //cadena += "If-else\n";
-            //System.out.println(ctx.model_ono().model_cond());
             if(ctx.model_ono().model_cond() == null){
-                //cadena += "If else\n";
                 if(visit(ctx.cond()) == 1){
                     return visitChildren(ctx.plural());
                 }else{
                     return visitChildren(ctx.model_ono());
                 }
             }else{
-                //cadena += "If else if\n";
-
                 return visitChildren(ctx.model_ono());
             }
-
         }
-
     }
 
     @Override public Integer visitModel_ono(lenguajesParser.Model_onoContext ctx) {
