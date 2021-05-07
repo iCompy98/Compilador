@@ -4,7 +4,10 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import valen.parser.lenguajesBaseVisitor;
 import valen.parser.lenguajesParser;
-import valen.sample.exceptions.*;
+import valen.sample.exceptions.CondicionInaceptable;
+import valen.sample.exceptions.DivisionIndebida;
+import valen.sample.exceptions.ErrorImprimirVacio;
+import valen.sample.exceptions.VariableNoDeclarada;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,14 +32,9 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         int value;
         if(memoria.containsKey(ctx.ID().getText()))
         {
-            if(memoria.get(ctx.ID().getText()) == null){
-                //System.out.println("No se a instanciado");
-                throw new VariableNoInstanciada(ctx.ID().getText(), ctx.ID().getSymbol());
-            }else{
                 value = memoria.get(ctx.ID().getText());
-            }
         }
-        else  {
+        else {
             throw new VariableNoDeclarada(ctx.ID().getText(), ctx.ID().getSymbol());
         }
         return value;
@@ -127,7 +125,7 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         //System.out.println(ctx.INTEGER().getText() + " "+ ctx.ID().getText()+ " "+ ctx.IGUAL());
         if(ctx.IGUAL() == null){
             //System.out.println("Entre cuando no existe valor");
-            memoria.put(ctx.ID().getText(),null);
+            memoria.put(ctx.ID().getText(),0);
         }else{
             //System.out.println("Entre cuando si existe valor");
             memoria.put(ctx.ID().getText(), visit(ctx.expr()));
@@ -240,31 +238,5 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         System.out.println("JJeeeeeloooouuuu");
         return visitChildren(ctx);
     }
-
-    @Override public Integer visitCond_logic(lenguajesParser.Cond_logicContext ctx) {
-        //System.out.println("Condicion logica");
-        int a = visit(ctx.comparacion(0));
-        int b = visit(ctx.comparacion(1));
-        if(ctx.O_LOG().getText().equals("&&")){
-            //System.out.println("Logic AND");
-            if(a == 1 && b == 1 ){
-                return 1;
-            }else{
-                return 0;
-            }
-        }else if(ctx.O_LOG().getText().equals("||")){
-            //System.out.println("Logic OR");
-            if(a == 1 || b == 1 ){
-                return 1;
-            }else{
-                return 0;
-            }
-        }else if(ctx.O_LOG().getText().equals("!")){
-            //System.out.println("Logic Negative");
-            //Pendiente
-        }
-        return visitChildren(ctx);
-    }
-
 
 }
