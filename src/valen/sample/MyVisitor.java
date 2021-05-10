@@ -210,18 +210,14 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         //System.out.println(ctx.model_ono());
 
         //Aqui esta el problemaaaaaaa!!!!
-        if(ctx.model_ono() == null){
+        if(visit(ctx.cond()) == 1){
             //cadena += "If normal\n";
             //cadena += visit(ctx.cond())+ "\n";
-            if(visit(ctx.cond()) == 1){
-                return visitChildren(ctx);
-            }else{
-                return null;
-            }
+            return visit(ctx.plural());
         }else{
             //cadena += "If-else\n";
             //System.out.println(ctx.model_ono().model_cond());
-            if(ctx.model_ono().model_cond() == null){
+            /*if(ctx.model_ono().model_cond() == null){
                 //cadena += "If else\n";
                 if(visit(ctx.cond()) == 1){
                     return visitChildren(ctx.plural());
@@ -233,14 +229,26 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
 
                 return visitChildren(ctx.model_ono());
             }
+*/
+            if (ctx.model_ono() != null){
+                return visit(ctx.model_ono());
+            }else{
+                return null;
+            }
 
         }
-
     }
 
     @Override public Integer visitModel_ono(lenguajesParser.Model_onoContext ctx) {
-        System.out.println("JJeeeeeloooouuuu");
-        return visitChildren(ctx);
+        //System.out.println(visit(ctx.plural()));
+        if(ctx.model_cond() == null){
+            System.out.println("If else");
+            return visit(ctx.plural());
+        }else{
+            System.out.println("If else if");
+            return visit(ctx.model_cond());
+        }
+
     }
 
     @Override public Integer visitCond_logic(lenguajesParser.Cond_logicContext ctx) {
