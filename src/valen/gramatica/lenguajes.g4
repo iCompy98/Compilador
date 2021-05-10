@@ -20,7 +20,8 @@ inicio:
 
 model_cond:CONDICION PAR_A cond PAR_C A_LL plural C_LL model_ono?;
 model_ono:ONO (A_LL plural C_LL| model_cond);
-comparacion: PAR_A? expr SIGNO expr PAR_C?;
+comparacion: expr SIGNO expr | parentesis_comp;
+parentesis_comp: PAR_A expr SIGNO expr PAR_C;
 cond_logic:  comparacion O_LOG comparacion ;
 cond: NEG? (comparacion | expr | cond_logic) ;
 

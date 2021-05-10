@@ -208,6 +208,8 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     @Override public Integer visitModel_cond(lenguajesParser.Model_condContext ctx) {
         //cadena += "Miren, estoy en la condicion\n";
         //System.out.println(ctx.model_ono());
+
+        //Aqui esta el problemaaaaaaa!!!!
         if(ctx.model_ono() == null){
             //cadena += "If normal\n";
             //cadena += visit(ctx.cond())+ "\n";
@@ -266,5 +268,73 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         return visitChildren(ctx);
     }
 
+    @Override public Integer visitParentesis_comp(lenguajesParser.Parentesis_compContext ctx) {
+        int izq = visit(ctx.expr(0));
+        int der = visit(ctx.expr(1));
+        int resul=0;
+
+        if (ctx.SIGNO().getText().equals("==")){
+            if(izq == der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+
+        if (ctx.SIGNO().getText().equals("!=")){
+            if(izq != der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+
+        if (ctx.SIGNO().getText().equals("<=")){
+            if(izq <= der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+
+        if (ctx.SIGNO().getText().equals(">=")){
+            if(izq >= der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if (ctx.SIGNO().getText().equals(">")){
+            if(izq > der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if (ctx.SIGNO().getText().equals("<")){
+            if(izq < der){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        return resul;
+    }
+
+    @Override public Integer visitCond(lenguajesParser.CondContext ctx) {
+        if (ctx.NEG() == null){
+            //System.out.println("No hay negacion");
+            return visitChildren(ctx);
+        }else{
+            //System.out.println("Si hay negacion");
+            int x = visitChildren(ctx);
+            if(x == 0){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+
+    }
 
 }
