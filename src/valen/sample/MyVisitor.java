@@ -261,64 +261,12 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
             }else{
                 return 0;
             }
-        }else if(ctx.O_LOG().getText().equals("!")){
-            //System.out.println("Logic Negative");
-            //Pendiente
         }
         return visitChildren(ctx);
     }
 
     @Override public Integer visitParentesis_comp(lenguajesParser.Parentesis_compContext ctx) {
-        int izq = visit(ctx.expr(0));
-        int der = visit(ctx.expr(1));
-        int resul=0;
-
-        if (ctx.SIGNO().getText().equals("==")){
-            if(izq == der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-
-        if (ctx.SIGNO().getText().equals("!=")){
-            if(izq != der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-
-        if (ctx.SIGNO().getText().equals("<=")){
-            if(izq <= der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-
-        if (ctx.SIGNO().getText().equals(">=")){
-            if(izq >= der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        if (ctx.SIGNO().getText().equals(">")){
-            if(izq > der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        if (ctx.SIGNO().getText().equals("<")){
-            if(izq < der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        return resul;
+        return visit(ctx.comparacion());
     }
 
     @Override public Integer visitCond(lenguajesParser.CondContext ctx) {

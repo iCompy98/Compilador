@@ -1,7 +1,20 @@
 programa{
-	si(1){
-		imprimir("Hola")
+	int base
+	int altura
+
+	base = 10
+	altura = 20
+
+imprimir("Tercera fase")
+	si(base == altura){
+		imprimir(base*10)
+	}no si(1 && 0){
+		imprimir(base)
 	}no{
-		imprimir("Aqui estoy yo")
-}
+		imprimir("No se cumple ninguna condicion")
+	}
+
+	
+
+	imprimir("fin del programa")
 }
