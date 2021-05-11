@@ -152,56 +152,62 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     }
 
     @Override public Integer visitComparacion(lenguajesParser.ComparacionContext ctx) {
-        int izq = visit(ctx.expr(0));
-        int der = visit(ctx.expr(1));
-        int resul=0;
+        try{
+            int izq = visit(ctx.expr(0));
+            int der = visit(ctx.expr(1));
+            int resul=0;
 
-        if (ctx.SIGNO().getText().equals("==")){
-            if(izq == der){
-                resul= 1;
-            }else{
-                resul= 0;
+            if (ctx.SIGNO().getText().equals("==")){
+                if(izq == der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
             }
+
+            if (ctx.SIGNO().getText().equals("!=")){
+                if(izq != der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
+            }
+
+            if (ctx.SIGNO().getText().equals("<=")){
+                if(izq <= der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
+            }
+
+            if (ctx.SIGNO().getText().equals(">=")){
+                if(izq >= der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
+            }
+            if (ctx.SIGNO().getText().equals(">")){
+                if(izq > der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
+            }
+            if (ctx.SIGNO().getText().equals("<")){
+                if(izq < der){
+                    resul= 1;
+                }else{
+                    resul= 0;
+                }
+            }
+            return resul;
+        }catch (Exception e){
+            System.out.println("HOla");
+            return visit(ctx.parentesis_comp());
         }
 
-        if (ctx.SIGNO().getText().equals("!=")){
-            if(izq != der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-
-        if (ctx.SIGNO().getText().equals("<=")){
-            if(izq <= der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-
-        if (ctx.SIGNO().getText().equals(">=")){
-            if(izq >= der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        if (ctx.SIGNO().getText().equals(">")){
-            if(izq > der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        if (ctx.SIGNO().getText().equals("<")){
-            if(izq < der){
-                resul= 1;
-            }else{
-                resul= 0;
-            }
-        }
-        return resul;
 
     }
 
@@ -274,13 +280,25 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     }
 
     @Override public Integer visitParentesis_comp(lenguajesParser.Parentesis_compContext ctx) {
-        return visit(ctx.comparacion());
+        if(ctx.comparacion() != null){
+            return visit(ctx.comparacion());
+        }else{
+            return visit(ctx.cond_logic());
+        }
     }
 
     @Override public Integer visitCond(lenguajesParser.CondContext ctx) {
         if (ctx.NEG() == null){
             //System.out.println("No hay negacion");
-            return visitChildren(ctx);
+            if(ctx.cond_logic() != null) {
+                return visit(ctx.cond_logic());
+            }else if(ctx.comparacion() != null){
+                return visit(ctx.comparacion());
+            }else if(ctx.expr() != null){
+                return visit(ctx.expr());
+            }else{
+                return visit(ctx.parentesis_comp());
+            }
         }else{
             //System.out.println("Si hay negacion");
             int x = visitChildren(ctx);

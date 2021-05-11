@@ -65,18 +65,6 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCondiciones(lenguajesParser.CondicionesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#model_cond}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitModel_cond(lenguajesParser.Model_condContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#model_ono}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitModel_ono(lenguajesParser.Model_onoContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link lenguajesParser#comparacion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -100,6 +88,18 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCond(lenguajesParser.CondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link lenguajesParser#model_cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModel_cond(lenguajesParser.Model_condContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link lenguajesParser#model_ono}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModel_ono(lenguajesParser.Model_onoContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parentesis}
 	 * labeled alternative in {@link lenguajesParser#expr}.
