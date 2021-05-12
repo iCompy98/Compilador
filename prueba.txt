@@ -1,8 +1,4 @@
-programa{
-	int a = 3
-	int b = 4
-	
-	si((a < b && b == 4)){
-		imprimir("Hola")
-	}
+void main(){
+    int a
+    System.out.println("Hola")
 }

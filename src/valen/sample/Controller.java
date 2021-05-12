@@ -13,6 +13,8 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import valen.parser.lenguajeC.LenguajeenCLexer;
+import valen.parser.lenguajeC.LenguajeenCParser;
 import valen.parser.lenguajesLexer;
 import valen.parser.lenguajesParser;
 import valen.sample.exceptions.MyExceptions;
@@ -61,11 +63,12 @@ public class Controller /*implements Initializable*/ {
             exc.printStackTrace();
         }
 
-        try {
+        /*try {
             correrGramatica(ruta);
         }catch(MyExceptions ex){
             txt_resultados.setText("Error:\n"+ex.getMessage());
-        }
+        }*/
+         convertirGramatica(ruta);
     }
 
         public void correrGramatica(String ruta) throws Exception{
@@ -80,6 +83,19 @@ public class Controller /*implements Initializable*/ {
 
             txt_resultados.setText(visitas.getCadena());
         }
+
+    public void convertirGramatica(String ruta) throws Exception{
+        CharStream input = CharStreams.fromFileName(ruta);
+        LenguajeenCLexer lexico = new LenguajeenCLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexico);
+        LenguajeenCParser sintactico = new LenguajeenCParser(tokens);
+        ParseTree arbol = sintactico.cascaron();
+
+        LenguajeC visitas = new LenguajeC();
+        visitas.visit(arbol);
+
+        System.out.println(visitas.getCodigo());
+    }
 
         public void saveFile(ActionEvent e) throws Exception{
         BufferedWriter escribir_archivo = null;
