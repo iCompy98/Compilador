@@ -39,7 +39,7 @@ inicio:
 
     CLASS: 'void main()';
     INTEGER: 'int';
-    IMPRIME: 'System.out.println';
+    IMPRIME: 'print';
     CONDICION: 'if';
     ONO: 'else';
     SIGNO: '==' | '!='| '<='| '>='|'>'|'<';

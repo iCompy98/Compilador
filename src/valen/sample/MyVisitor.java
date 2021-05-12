@@ -259,20 +259,26 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
 
     @Override public Integer visitCond_logic(lenguajesParser.Cond_logicContext ctx) {
         //System.out.println("Condicion logica");
-        int a = visit(ctx.comparacion(0));
-        int b = visit(ctx.comparacion(1));
-        if(ctx.O_LOG().getText().equals("&&")){
+        int a,b;
+        try{
+            a = visit(ctx.comparacion(0));
+            b = visit(ctx.comparacion(1));
+        }catch (Exception e){
+            a = visit(ctx.expr(0));
+            b = visit(ctx.expr(1));
+        }
+        if (ctx.O_LOG().getText().equals("&&")) {
             //System.out.println("Logic AND");
-            if(a == 1 && b == 1 ){
+            if (a == 1 && b == 1) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
-        }else if(ctx.O_LOG().getText().equals("||")){
+        } else if (ctx.O_LOG().getText().equals("||")) {
             //System.out.println("Logic OR");
-            if(a == 1 || b == 1 ){
+            if (a == 1 || b == 1) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
         }

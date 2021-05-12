@@ -34,9 +34,9 @@ public class LenguajeenCParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'void main()'", "'int'", "'System.out.println'", "'if'", "'else'", 
-			null, null, "'!'", "'{'", "'}'", "'='", "'*'", "'/'", "'+'", "'-'", "','", 
-			null, null, null, "'('", "')'"
+			null, "'void main()'", "'int'", "'print'", "'if'", "'else'", null, null, 
+			"'!'", "'{'", "'}'", "'='", "'*'", "'/'", "'+'", "'-'", "','", null, 
+			null, null, "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();

@@ -2,7 +2,7 @@ token literal names:
 null
 'void main()'
 'int'
-'System.out.println'
+'print'
 'if'
 'else'
 null
