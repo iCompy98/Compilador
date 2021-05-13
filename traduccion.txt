@@ -1,0 +1,31 @@
+void main(){
+    printf("Ejecutando la fase del Analizador Semántico");
+    if ( 1 ) {
+        printf( "Estamos empezando" );
+    }
+
+    int pasaporte;
+    int visa;
+    int dinero;
+
+    pasaporte = 1;
+    visa = 0;
+    dinero = 1;
+
+    if ( pasaporte && visa ){
+        printf( "Puedo viajar a paises que pidan visa" );
+        if( dinero ) {
+            printf( "¡Buen trabajo, a viajar!");
+        } else {
+            printf( "Hay que seguir ahorrando para poder viajar");
+        }
+    } else if ( pasaporte || dinero ){
+        printf( "Puedes visitar varios paises, pero nó, USA");
+    } else {
+        printf( "La vida es cruel");
+    }
+
+    printf("Finalizamos el viaje");
+
+    
+}

@@ -1,9 +1,19 @@
-void main(){
-	int a,b,c
-	a = 2
-	b =4
-	print(a)
-	if(a == b){
-	    print("hola")
-	}
+programa{
+	imprimir("Ejecutando la fase del Analizador Semántico")	si(1){
+		imprimir("Estamos empezando")
+	}	int pasaporte
+	int visa
+	int dinero
+	pasaporte = 1;
+	visa = 0;
+	dinero = 1;
+	si(pasaporte&&visa){
+		imprimir("Puedo viajar a paises que pidan visa")	si(dinero){
+		imprimir("¡Buen trabajo, a viajar!")
+	}no{	imprimir("Hay que seguir ahorrando para poder viajar")}
+
+	}no si(pasaporte||dinero){
+		imprimir("Puedes visitar varios paises, pero nó, USA")
+	}no{	imprimir("La vida es cruel")}
+	imprimir("Finalizamos el viaje")
 }

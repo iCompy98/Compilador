@@ -39,6 +39,7 @@ public class Controller /*implements Initializable*/ {
         private JFileChooser fc = new JFileChooser();
         private String aux_lector;
         private boolean saveFlag=true;
+        String ruta= "prueba.txt";
 
         /*@Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,7 +51,7 @@ public class Controller /*implements Initializable*/ {
         txt_resultados.setText("");
         String data = txt_Test.getText();
         File archivo=null;
-        String ruta= "prueba.txt";
+
 
         //Crear archivo
         try {
@@ -63,15 +64,15 @@ public class Controller /*implements Initializable*/ {
             exc.printStackTrace();
         }
 
-        /*try {
+        try {
             correrGramatica(ruta);
         }catch(MyExceptions ex){
             txt_resultados.setText("Error:\n"+ex.getMessage());
-        }*/
-         convertirGramatica(ruta);
+        }
+         //convertirGramatica(ruta);
     }
 
-        public void correrGramatica(String ruta) throws Exception{
+    public void correrGramatica(String ruta) throws Exception{
             CharStream input = CharStreams.fromFileName(ruta);
             lenguajesLexer lexico = new lenguajesLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexico);
@@ -84,7 +85,19 @@ public class Controller /*implements Initializable*/ {
             txt_resultados.setText(visitas.getCadena());
         }
 
-    public void convertirGramatica(String ruta) throws Exception{
+    public String convertirGramatica() throws Exception{
+            String data = txt_Test.getText();
+            File archivo= null;
+            String ruta="traduccion.txt";
+        try {
+            archivo = new File(ruta);
+            FileWriter fw = new FileWriter(archivo);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(data);
+            bw.close();
+        }catch (Exception exc) {
+            exc.printStackTrace();
+        }
         CharStream input = CharStreams.fromFileName(ruta);
         LenguajeenCLexer lexico = new LenguajeenCLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexico);
@@ -94,10 +107,15 @@ public class Controller /*implements Initializable*/ {
         LenguajeC visitas = new LenguajeC();
         visitas.visit(arbol);
 
-        System.out.println(visitas.getCodigo());
+        return visitas.getCodigo();
     }
 
-        public void saveFile(ActionEvent e) throws Exception{
+    public void traducir(ActionEvent e) throws Exception{
+        System.out.println(convertirGramatica());
+        txt_Test.setText(convertirGramatica());
+    }
+
+    public void saveFile(ActionEvent e) throws Exception{
         BufferedWriter escribir_archivo = null;
         if(saveFlag){
             //Primera vez

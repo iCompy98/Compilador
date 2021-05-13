@@ -6,3 +6,9 @@ programa{
     (soda * 5 ) + dulce * 3
     int x
 }
+
+programa{
+	si(1){
+		imprimir("Hola")
+}
+}

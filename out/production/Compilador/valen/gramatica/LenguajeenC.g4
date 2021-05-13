@@ -1,11 +1,11 @@
 grammar LenguajeenC;
 
-cascaron: CLASS A_LL plural C_LL;
+cascaron: CLASS A_LL  plural C_LL;
 
 plural: inicio+;
 
 inicio:
-    NUEVALINEA                 #espacio
+    NUEVALINEA                #espacio
     |
     ID IGUAL expr NUEVALINEA    #asignacion
     |
@@ -15,7 +15,7 @@ inicio:
     |
     INTEGER (ID COMA)* ID NUEVALINEA            #declaracionMultiple
     |
-    model_cond NUEVALINEA                       #condiciones
+    model_cond             #condiciones
     ;
 
     comparacion: expr SIGNO expr | parentesis_comp;
@@ -39,7 +39,7 @@ inicio:
 
     CLASS: 'void main()';
     INTEGER: 'int';
-    IMPRIME: 'print';
+    IMPRIME: 'printf';
     CONDICION: 'if';
     ONO: 'else';
     SIGNO: '==' | '!='| '<='| '>='|'>'|'<';
@@ -59,5 +59,5 @@ inicio:
     fragment ESC: '\\' [btnr"\\];
     PAR_A: '(';
     PAR_C: ')';
-    NUEVALINEA: [\r\n];
-    WS: [ \t]->skip;
+    NUEVALINEA: ';';
+    WS: (  [ \t\n])->skip;
