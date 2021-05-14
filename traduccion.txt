@@ -4,9 +4,7 @@ void main(){
         printf( "Estamos empezando" );
     }
 
-    int pasaporte;
-    int visa;
-    int dinero;
+    int pasaporte, visa, dinero;
 
     pasaporte = 1;
     visa = 0;

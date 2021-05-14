@@ -143,7 +143,7 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     @Override public Integer visitDeclaracionMultiple(lenguajesParser.DeclaracionMultipleContext ctx) {
         //System.out.println("Hola, visitamos a DeclaracionMultiple");
         for(TerminalNode x:ctx.ID()){
-            System.out.println(x.getText());
+            //System.out.println(x.getText());
             memoria.put(x.getText(),0);
 
         }
@@ -204,7 +204,7 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
             }
             return resul;
         }catch (Exception e){
-            System.out.println("HOla");
+            //System.out.println("HOla");
             return visit(ctx.parentesis_comp());
         }
 
@@ -248,10 +248,10 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
     @Override public Integer visitModel_ono(lenguajesParser.Model_onoContext ctx) {
         //System.out.println(visit(ctx.plural()));
         if(ctx.model_cond() == null){
-            System.out.println("If else");
+            //System.out.println("If else");
             return visit(ctx.plural());
         }else{
-            System.out.println("If else if");
+            //System.out.println("If else if");
             return visit(ctx.model_cond());
         }
 

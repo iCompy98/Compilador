@@ -12,7 +12,7 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
     String codigo = "";
     @Override public String visitCascaron(LenguajeenCParser.CascaronContext ctx) {
         //System.out.println("-----Visite Cascaron ------");
-        codigo += "programa{\n"+visit(ctx.plural())+"\n}";
+        codigo += "programa{\n"+visit(ctx.plural())+"}";
         return visit(ctx.plural());
     }
 
@@ -35,7 +35,7 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
         }else{
             x += ctx.STRING().getText();
         }
-        x+=")";
+        x+=")\n";
         return x;
     }
 
@@ -48,7 +48,7 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
     }
 
     @Override public String visitAsignacion(LenguajeenCParser.AsignacionContext ctx) {
-        return ctx.ID().getText()+" = "+visit(ctx.expr())+";\n";
+        return ctx.ID().getText()+" = "+visit(ctx.expr())+"\n";
     }
 
     @Override public String visitId(LenguajeenCParser.IdContext ctx) {
@@ -57,19 +57,18 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
 
     @Override public String visitDeclaracionMultiple(LenguajeenCParser.DeclaracionMultipleContext ctx) {
         String x = "int ";
-        int f=ctx.ID().toArray().length;
-        for (int i=0; i<=f; i++) {
-                x += ctx.ID(i).getText();
-                if(i!=f){
-                    x+=", ";
-                }
+        int f=ctx.ID().size();
+        for (TerminalNode i: ctx.ID()){
+            x += i.getText()+", ";
         }
-        x+= ";\n";
-        return x; 
+        x=x.substring(0,x.length()-2);
+        x+= "\n";
+
+        return x;
     }
 
     @Override public String visitCondiciones(LenguajeenCParser.CondicionesContext ctx) {
-        return visit(ctx.model_cond());
+        return visit(ctx.model_cond())+"\n";
     }
 
     @Override public String visitModel_cond(LenguajeenCParser.Model_condContext ctx) {
@@ -83,7 +82,7 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
 
     @Override public String visitModel_ono(LenguajeenCParser.Model_onoContext ctx) {
         if (ctx.plural() != null) {
-            return "no{"+visit(ctx.plural())+"}\n";
+            return "no{\n"+visit(ctx.plural())+"}\n";
         }else{
             return "no "+visit(ctx.model_cond());
         }

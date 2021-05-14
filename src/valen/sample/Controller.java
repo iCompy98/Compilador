@@ -111,7 +111,6 @@ public class Controller /*implements Initializable*/ {
     }
 
     public void traducir(ActionEvent e) throws Exception{
-        System.out.println(convertirGramatica());
         txt_Test.setText(convertirGramatica());
     }
 
