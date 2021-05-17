@@ -65,23 +65,11 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCondiciones(lenguajesParser.CondicionesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#comparacion}.
+	 * Visit a parse tree produced by {@link lenguajesParser#condicional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparacion(lenguajesParser.ComparacionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#parentesis_comp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParentesis_comp(lenguajesParser.Parentesis_compContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link lenguajesParser#cond_logic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCond_logic(lenguajesParser.Cond_logicContext ctx);
+	T visitCondicional(lenguajesParser.CondicionalContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link lenguajesParser#cond}.
 	 * @param ctx the parse tree

@@ -18,10 +18,8 @@ inicio:
     model_cond NUEVALINEA                       #condiciones
     ;
 
-comparacion: expr SIGNO expr | parentesis_comp;
-parentesis_comp: PAR_A (cond_logic| comparacion) PAR_C;
-cond_logic:  comparacion O_LOG comparacion | expr O_LOG expr ;
-cond: NEG? (parentesis_comp |expr| cond_logic| comparacion);
+condicional: expr | PAR_A cond PAR_C;
+cond: NEG? condicional ((SIGNO condicional)* | (O_LOG condicional)*);
 model_cond:CONDICION PAR_A cond PAR_C A_LL plural C_LL model_ono?;
 model_ono:ONO (A_LL plural C_LL| model_cond);
 

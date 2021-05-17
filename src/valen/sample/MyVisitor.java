@@ -150,67 +150,7 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         //System.out.println(ctx.ID().getText());
         return null;
     }
-
-    @Override public Integer visitComparacion(lenguajesParser.ComparacionContext ctx) {
-        try{
-            int izq = visit(ctx.expr(0));
-            int der = visit(ctx.expr(1));
-            int resul=0;
-
-            if (ctx.SIGNO().getText().equals("==")){
-                if(izq == der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-
-            if (ctx.SIGNO().getText().equals("!=")){
-                if(izq != der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-
-            if (ctx.SIGNO().getText().equals("<=")){
-                if(izq <= der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-
-            if (ctx.SIGNO().getText().equals(">=")){
-                if(izq >= der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-            if (ctx.SIGNO().getText().equals(">")){
-                if(izq > der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-            if (ctx.SIGNO().getText().equals("<")){
-                if(izq < der){
-                    resul= 1;
-                }else{
-                    resul= 0;
-                }
-            }
-            return resul;
-        }catch (Exception e){
-            //System.out.println("HOla");
-            return visit(ctx.parentesis_comp());
-        }
-
-
-    }
-
+    
     @Override public Integer visitModel_cond(lenguajesParser.Model_condContext ctx) {
         //cadena += "Miren, estoy en la condicion\n";
         //System.out.println(ctx.model_ono());
@@ -256,65 +196,103 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         }
 
     }
-
-    @Override public Integer visitCond_logic(lenguajesParser.Cond_logicContext ctx) {
-        //System.out.println("Condicion logica");
-        int a,b;
-        try{
-            a = visit(ctx.comparacion(0));
-            b = visit(ctx.comparacion(1));
-        }catch (Exception e){
-            a = visit(ctx.expr(0));
-            b = visit(ctx.expr(1));
-        }
-        if (ctx.O_LOG().getText().equals("&&")) {
-            //System.out.println("Logic AND");
-            if (a == 1 && b == 1) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else if (ctx.O_LOG().getText().equals("||")) {
-            //System.out.println("Logic OR");
-            if (a == 1 || b == 1) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
-        return visitChildren(ctx);
-    }
-
-    @Override public Integer visitParentesis_comp(lenguajesParser.Parentesis_compContext ctx) {
-        if(ctx.comparacion() != null){
-            return visit(ctx.comparacion());
-        }else{
-            return visit(ctx.cond_logic());
-        }
-    }
-
+    
     @Override public Integer visitCond(lenguajesParser.CondContext ctx) {
-        if (ctx.NEG() == null){
-            //System.out.println("No hay negacion");
-            if(ctx.cond_logic() != null) {
-                return visit(ctx.cond_logic());
-            }else if(ctx.comparacion() != null){
-                return visit(ctx.comparacion());
-            }else if(ctx.expr() != null){
-                return visit(ctx.expr());
+        int resul=0;
+        if(ctx.NEG() !=null){
+            if (visit(ctx.condicional(0))==1){
+                resul= 0;
             }else{
-                return visit(ctx.parentesis_comp());
+                resul= 1;
             }
-        }else{
-            //System.out.println("Si hay negacion");
-            int x = visitChildren(ctx);
-            if(x == 0){
-                return 1;
+        }else {
+            if(ctx.O_LOG(0) == null && ctx.SIGNO(0) == null){
+                resul= visit(ctx.condicional(0));
             }else{
-                return 0;
+                int a =visit(ctx.condicional(0));
+                int b = visit(ctx.condicional(1));
+                if(ctx.O_LOG(0) != null){
+                    String c = ctx.O_LOG(0).getText();
+                    resul=solucionesLogicas(a,c,b);
+                }else{
+                    String c = ctx.SIGNO(0).getText();
+                    resul=solucionesAritmeticas(a,c,b);
+                }
             }
         }
-
+        return resul;
     }
 
+    @Override public Integer visitCondicional(lenguajesParser.CondicionalContext ctx) {
+        if(ctx.expr() != null){
+            return visit(ctx.expr());
+        }else{
+            return visit(ctx.cond());
+        }
+    }
+
+    public Integer solucionesLogicas(int a, String c, int b){
+        int resul=0;
+        if(c.equals("&&")){
+            if(a == 1 && b == 1){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals("||")){
+            if(a == 1 || b == 1){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        return resul;
+    }
+    public Integer solucionesAritmeticas(int a, String c, int b){
+        int resul=0;
+        if(c.equals("==")){
+            if(a == b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals("!=")){
+            if(a != b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals("<=")){
+            if(a <= b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals(">=")){
+            if(a >= b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals(">")){
+            if(a > b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        if(c.equals("<")){
+            if(a < b){
+                resul= 1;
+            }else{
+                resul= 0;
+            }
+        }
+        return resul;
+    }
 }
