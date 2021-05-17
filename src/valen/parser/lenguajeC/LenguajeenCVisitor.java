@@ -65,23 +65,24 @@ public interface LenguajeenCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCondiciones(LenguajeenCParser.CondicionesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LenguajeenCParser#comparacion}.
+	 * Visit a parse tree produced by the {@code cicloWhile}
+	 * labeled alternative in {@link LenguajeenCParser#inicio}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparacion(LenguajeenCParser.ComparacionContext ctx);
+	T visitCicloWhile(LenguajeenCParser.CicloWhileContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LenguajeenCParser#parentesis_comp}.
+	 * Visit a parse tree produced by {@link LenguajeenCParser#model_while}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParentesis_comp(LenguajeenCParser.Parentesis_compContext ctx);
+	T visitModel_while(LenguajeenCParser.Model_whileContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LenguajeenCParser#cond_logic}.
+	 * Visit a parse tree produced by {@link LenguajeenCParser#condicional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCond_logic(LenguajeenCParser.Cond_logicContext ctx);
+	T visitCondicional(LenguajeenCParser.CondicionalContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LenguajeenCParser#cond}.
 	 * @param ctx the parse tree

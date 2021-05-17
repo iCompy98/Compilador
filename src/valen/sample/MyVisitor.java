@@ -209,15 +209,25 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
             if(ctx.O_LOG(0) == null && ctx.SIGNO(0) == null){
                 resul= visit(ctx.condicional(0));
             }else{
-                int a =visit(ctx.condicional(0));
-                int b = visit(ctx.condicional(1));
-                if(ctx.O_LOG(0) != null){
-                    String c = ctx.O_LOG(0).getText();
-                    resul=solucionesLogicas(a,c,b);
-                }else{
-                    String c = ctx.SIGNO(0).getText();
-                    resul=solucionesAritmeticas(a,c,b);
+                int f=ctx.O_LOG().toArray().length+ctx.SIGNO().toArray().length;
+                int temp=0;
+                for(int i=0; i<=(f-1); i++){
+                    int a;
+                    if(i == 0){
+                        a = visit(ctx.condicional(i));
+                    }else{
+                        a = temp;
+                    }
+                    int b = visit(ctx.condicional(i+1));
+                    if (ctx.O_LOG(i) != null) {
+                        String c = ctx.O_LOG(i).getText();
+                        temp = solucionesLogicas(a, c, b);
+                    } else {
+                        String c = ctx.SIGNO(i).getText();
+                        temp = solucionesAritmeticas(a, c, b);
+                    }
                 }
+                resul=temp;
             }
         }
         return resul;
@@ -295,4 +305,21 @@ public class MyVisitor extends lenguajesBaseVisitor<Integer>  {
         }
         return resul;
     }
+
+    @Override public Integer visitCicloWhile(lenguajesParser.CicloWhileContext ctx) {
+        System.out.println("Holaaaaaaaaaaaa");
+        return visit(ctx.model_while());
+    }
+
+    @Override public Integer visitModel_while(lenguajesParser.Model_whileContext ctx) {
+        System.out.println(visit(ctx.cond()));
+        if(visit(ctx.cond()) == 1){
+            visit(ctx.plural());
+            return visitModel_while(ctx);
+        }else{
+            return null;
+        }
+
+    }
+
 }

@@ -65,6 +65,19 @@ public interface lenguajesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCondiciones(lenguajesParser.CondicionesContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code cicloWhile}
+	 * labeled alternative in {@link lenguajesParser#inicio}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCicloWhile(lenguajesParser.CicloWhileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link lenguajesParser#model_while}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModel_while(lenguajesParser.Model_whileContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link lenguajesParser#condicional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

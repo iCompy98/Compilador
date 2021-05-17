@@ -1,6 +1,13 @@
-programa{
-    imprimir("Ejecutando la fase del Analizador Semántico")
-    si ( 1 && (0 || 1) && 1) {
-        imprimir( "Estamos empezando" )
+void main(){
+    printf("Indica el número de saludos que quieres hacer");
+
+    int saludos;
+    saludos = 10;
+
+    while ( saludos != 0 ){
+        printf( saludos );
+        saludos = saludos - 1;
     }
+
+    printf( "Fin del programa" );
 }

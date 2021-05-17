@@ -1,5 +1,9 @@
 programa{
-	si( 1 && (0 || 1) && 0){
-		imprimir("Hola")
-	}
+	imprimir("Indica el número de saludos que quieres hacer")
+	int saludos
+	saludos = 10
+	mientras(saludos!=0){
+	imprimir(saludos)
+	saludos = saludos-1
+}	imprimir("Fin del programa")
 }

@@ -73,21 +73,21 @@ public class LenguajeenCBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitComparacion(LenguajeenCParser.ComparacionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCicloWhile(LenguajeenCParser.CicloWhileContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParentesis_comp(LenguajeenCParser.Parentesis_compContext ctx) { return visitChildren(ctx); }
+	@Override public T visitModel_while(LenguajeenCParser.Model_whileContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCond_logic(LenguajeenCParser.Cond_logicContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCondicional(LenguajeenCParser.CondicionalContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

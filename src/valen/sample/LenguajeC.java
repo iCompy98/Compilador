@@ -44,11 +44,16 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
     }
 
     @Override public String visitDeclaracion(LenguajeenCParser.DeclaracionContext ctx) {
-        return  "int "+ctx.ID()+"\n";
+        String x="int "+ctx.ID();
+        if (ctx.IGUAL() != null) {
+            x += ctx.IGUAL().getText()+" "+ctx.expr().getText();
+        }
+        x+="\n";
+        return x;
     }
 
     @Override public String visitAsignacion(LenguajeenCParser.AsignacionContext ctx) {
-        return ctx.ID().getText()+" = "+visit(ctx.expr())+"\n";
+        return ctx.ID().getText()+" = "+ctx.expr().getText()+"\n";
     }
 
     @Override public String visitId(LenguajeenCParser.IdContext ctx) {
@@ -88,5 +93,12 @@ public class LenguajeC extends LenguajeenCBaseVisitor<String> {
         }
     }
 
+    @Override public String visitCicloWhile(LenguajeenCParser.CicloWhileContext ctx) {
+        return visit(ctx.model_while());
+    }
+
+    @Override public String visitModel_while(LenguajeenCParser.Model_whileContext ctx) {
+        return "mientras("+ctx.cond().getText()+"){\n"+visit(ctx.plural())+"}";
+    }
 
 }

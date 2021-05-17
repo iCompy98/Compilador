@@ -16,7 +16,13 @@ inicio:
     INTEGER (ID COMA)* ID NUEVALINEA            #declaracionMultiple
     |
     model_cond NUEVALINEA                       #condiciones
+    |
+    model_while NUEVALINEA          #cicloWhile
     ;
+
+
+model_while: WHILE PAR_A cond PAR_C A_LL plural C_LL ;
+
 
 condicional: expr | PAR_A cond PAR_C;
 cond: NEG? condicional ((SIGNO condicional)* | (O_LOG condicional)*);
@@ -40,6 +46,7 @@ INTEGER: 'int';
 IMPRIME: 'imprimir';
 CONDICION: 'si';
 ONO: 'no';
+WHILE: 'mientras' ;
 SIGNO: '==' | '!='| '<='| '>='|'>'|'<';
 O_LOG:  '&&' | '||';
 NEG : '!';
