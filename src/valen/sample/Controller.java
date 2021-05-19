@@ -15,6 +15,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import valen.parser.lenguajeC.LenguajeenCLexer;
 import valen.parser.lenguajeC.LenguajeenCParser;
+import valen.parser.lenguajeenMi.LenguajeenMiLexer;
+import valen.parser.lenguajeenMi.LenguajeenMiParser;
 import valen.parser.lenguajesLexer;
 import valen.parser.lenguajesParser;
 import valen.sample.exceptions.MyExceptions;
@@ -110,8 +112,33 @@ public class Controller /*implements Initializable*/ {
         return visitas.getCodigo();
     }
 
+    public String convertirGramaticaC_Mio() throws Exception{
+        String data = txt_Test.getText();
+        File archivo= null;
+        String ruta="traduccion.txt";
+        try {
+            archivo = new File(ruta);
+            FileWriter fw = new FileWriter(archivo);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(data);
+            bw.close();
+        }catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        CharStream input = CharStreams.fromFileName(ruta);
+        LenguajeenMiLexer lexico = new LenguajeenMiLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexico);
+        LenguajeenMiParser sintactico = new LenguajeenMiParser(tokens);
+        ParseTree arbol = sintactico.cascaron();
+
+        LenguajeMio visitas = new LenguajeMio();
+
+        return visitas.visit(arbol);
+    }
+
+
     public void traducir(ActionEvent e) throws Exception{
-        txt_Test.setText(convertirGramatica());
+        txt_Test.setText(convertirGramaticaC_Mio());
     }
 
     public void saveFile(ActionEvent e) throws Exception{

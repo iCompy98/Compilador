@@ -1,13 +1,18 @@
-void main(){
-    printf("Indica el número de saludos que quieres hacer");
-
-    int saludos;
-    saludos = 10;
-
-    while ( saludos != 0 ){
-        printf( saludos );
-        saludos = saludos - 1;
-    }
-
-    printf( "Fin del programa" );
+programa{
+	si(1){
+		imprimir("Hola")
+		si(1) {
+			imprimir("Hi")
+			imprimir(1)
+		}no{
+			imprimir("Hello")
+			imprimir(0)
+		}
+		int a=0
+		mientras(a<=3){
+			imprimir(a)
+			a=a-1
+		}
+		imprimir("Adios")
+	}
 }

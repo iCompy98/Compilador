@@ -1,6 +1,6 @@
 grammar LenguajeenC;
 
-cascaron: CLASS A_LL  plural C_LL;
+cascaron: LIB CLASS A_LL  plural C_LL;
 
 plural: inicio+;
 
@@ -40,6 +40,7 @@ model_while: WHILE PAR_A cond PAR_C A_LL plural C_LL ;
     prod_muldiv: POR | DIV;
     prod_sumres: SUMA | RESTA;
 
+    LIB: '#include <stdio.h>';
     CLASS: 'void main()';
     INTEGER: 'int';
     IMPRIME: 'printf';
